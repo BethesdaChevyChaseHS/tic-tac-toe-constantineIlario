@@ -1,17 +1,6 @@
 package bcc.tictactoe;
 
 import com.badlogic.gdx.Game;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
-
-import java.util.ArrayList;
 
 public class TicTacToe extends Game {
     private Player player1;
@@ -28,9 +17,7 @@ public class TicTacToe extends Game {
     }
 
     @Override
-    public void dispose() {
-
-    }
+    public void dispose() {}
 
     public void setPlayer(int curPlayer, String option) {
         if (option.equalsIgnoreCase("Human")) {
@@ -46,7 +33,7 @@ public class TicTacToe extends Game {
                 player2 = new RandomAI();
             }
         }
-    
+
         if (curPlayer == 0) {
             setScreen(new PlayerSelectionScreen(this, 1));
         } else {
@@ -54,8 +41,6 @@ public class TicTacToe extends Game {
             setScreen(new GameDisplay(this));
         }
     }
-    
-        
 
     public void setSimulated(boolean isSimulated) {
         this.isSimulated = isSimulated;
@@ -93,24 +78,18 @@ public class TicTacToe extends Game {
         return curPlayer;
     }
 
-    public void setCurPlayer(int curPlayer) {
-        this.curPlayer = curPlayer;
+    public void setCurPlayer(Mark mark) {
+        this.curPlayer = (mark == Mark.X) ? 0 : 1; // Convert Mark to int
     }
+    
+    
 
-    public Player getCurPlayerObj() {
-        if(curPlayer == 0) {
-            return player1;
-        } else {
-            return player2;
-        }
+    public Player getCurrentPlayer() {  // Renamed for clarity
+        return (curPlayer == 0) ? player1 : player2;
     }
 
     public Mark getCurPlayerMark() {
-        if(curPlayer == 0) {
-            return Mark.X;
-        } else {
-            return Mark.O;
-        }
+        return (curPlayer == 0) ? Mark.X : Mark.O;
     }
 
     public int getNumberOfRounds() {
@@ -128,6 +107,7 @@ public class TicTacToe extends Game {
     public int getRound() {
         return round;
     }
+
     public void incrementRound() {
         round++;
     }
