@@ -183,9 +183,9 @@ public class GameDisplay extends ScreenAdapter {
     public void resetGame() {
         game.getBoardState().reset();
         game.setCurPlayer(Mark.X);
-        gameOver = false;
         updateBoardDisplay();
         updateTurnLabel();
+        gameOver = false;
     }
 
     public void updateBoardDisplay() {
@@ -214,6 +214,16 @@ public class GameDisplay extends ScreenAdapter {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         stage.act(delta);
         stage.draw();
+
+        if (!(game.getCurPlayerObj() instanceof Human)) {
+            Move m = game.getCurPlayerObj().makeMove(game.getBoardState(), game.getCurPlayerMark());
+            game.getBoardState().makeMove(m, game.getCurPlayerMark());
+            handleMoveMade();
+            game.nextPlayer();
+        }
+
+
+
     }
 
     @Override
