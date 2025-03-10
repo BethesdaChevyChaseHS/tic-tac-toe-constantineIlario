@@ -9,7 +9,7 @@ public class TicTacToe extends Game {
     private int curPlayer = 0;
     private int numberOfRounds;
     private boolean isSimulated;
-    private int round = 0;
+    private int round = 1;
 
     @Override
     public void create() {
